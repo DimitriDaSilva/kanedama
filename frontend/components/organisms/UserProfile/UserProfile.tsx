@@ -4,7 +4,12 @@ import { Container, NameContainer, Skeleton } from './layouts';
 import { useUserProfile } from 'models/hooks/useUserProfile';
 
 const UserProfile = () => {
-  const { data: user, isLoading } = useUserProfile();
+  const { data: user, isLoading } = useUserProfile({
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    refreshWhenHidden: false,
+    refreshInterval: 0,
+  });
 
   if (isLoading) return <Skeleton />;
 
