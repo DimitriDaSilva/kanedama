@@ -1,10 +1,10 @@
-import { fetcher } from 'utils/fetcher';
+import { SWROptions, Transformer } from './types';
+import { createFetcher } from 'utils/createFetcher';
 import useSWR from 'swr';
-import { PublicConfiguration } from 'swr/dist/types';
 
 export interface QueryFactoryOptions<T> {
   url: string;
-  transformer: (data: any) => T;
+  transformer: Transformer<T>;
 }
 
 export interface QueryFactoryResult<T> {
@@ -13,18 +13,12 @@ export interface QueryFactoryResult<T> {
   data: T;
 }
 
-type SWROptions =
-  | Partial<PublicConfiguration<any, any, (args_0: string) => any>>
-  | undefined;
-
 export const createQuery =
   <T>({ url, transformer }: QueryFactoryOptions<T>) =>
-  (options: SWROptions = undefined): QueryFactoryResult<T> => {
-    const { data: raw, error } = useSWR(url, fetcher, options);
-    console.log({ raw });
-    const data = raw && transformer(raw);
+  (options?: SWROptions): QueryFactoryResult<T> => {
+    const { data, error } = useSWR(url, createFetcher<T>(transformer), options);
 
-    const isLoading = !error && !raw;
+    const isLoading = !error && !data;
 
     const isError = Boolean(error);
 

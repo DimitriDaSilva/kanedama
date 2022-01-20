@@ -1,6 +1,7 @@
 import { Compagny } from 'models/Compagny';
+import { Transformer } from 'utils/types';
 
-export const createCompagny = (compagny: any): Compagny => {
+export const createCompagny: Transformer<Compagny> = (compagny) => {
   const { denomination, siren, nic_siege, etablissements } =
     compagny.unite_legale;
   return {

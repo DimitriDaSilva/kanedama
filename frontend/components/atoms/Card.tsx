@@ -13,6 +13,11 @@ const Card = styled.div`
   max-width: 22rem;
   height: 6.5rem;
   gap: 1rem;
+  transition: box-shadow 0.2s ease-in-out;
+  :hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  cursor: pointer;
 `;
 
 export default Card;

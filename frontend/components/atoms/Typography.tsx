@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import colors from 'styles/colors';
 
 const Typography = styled.div<{
-  fontSize?: string;
-  color?: string;
+  fontSize?: CSSProperties['fontSize'];
+  color?: CSSProperties['color'];
   uppercase?: boolean;
-  fontWeight?: 'normal' | 'bold';
+  fontWeight?: CSSProperties['fontWeight'];
 }>`
   display: flex;
   font-size: ${({ fontSize }) => fontSize || '1rem'};
