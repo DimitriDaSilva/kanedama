@@ -81,4 +81,4 @@ We have a fetcher factory that you can use this way
 const { data, error } = useSWR(url, createFetcher<T>(transformer), options);
 ```
 
-that will create a fetcher with a transformer with a generic type
+that will create a fetcher that have a transformer with a generic type
