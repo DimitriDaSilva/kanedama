@@ -18,8 +18,8 @@ we can break down components in atomics components
     ├── ...
     ├── components
     │   ├── atoms               # only styled.x stuffs, very small blocks
-    │   ├── molecule            # complexe blocks created from groups of atoms, but still pure
-    │   ├── organims            # complexe blocks hydrated with data
+    │   ├── molecule            # complex blocks created from groups of atoms, but still pure
+    │   ├── organims            # complex blocks hydrated with data
     │   └── templates           # utils components, layout and stuffs
     └── ...
 
