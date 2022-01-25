@@ -1,0 +1,8 @@
+{
+  "unite_legale": {
+    "denomination": "DENOMINATION",
+    "siren": "SIREN",
+    "nic_siege": "NIC_SIEGE",
+    "etablissements": [{ "geo_adresse": "GEO_ADRESSE" }]
+  }
+}

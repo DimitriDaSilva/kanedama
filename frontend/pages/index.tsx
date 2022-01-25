@@ -4,7 +4,7 @@ import MainContainer from '@/components/templates/MainContainer';
 import PageContainer from '@/components/templates/PageContainer';
 import Typography from '@/components/atoms/Typography';
 import AccountProfile from '@/components/organisms/AccountProfile';
-import CompagnyProfile from '@/components/organisms/CompagnyProfile';
+import CompagnyProfile from '@/components/organisms/CompanyProfile';
 import UserProfile from '@/components/organisms/UserProfile/UserProfile';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -32,7 +32,7 @@ const Home: NextPage = () => (
       <UserProfile />
       <SectionContainer>
         <Typography fontSize="1.5rem" fontWeight="bold">
-          Compagny
+          Company
         </Typography>
         <CompagnyProfile />
       </SectionContainer>

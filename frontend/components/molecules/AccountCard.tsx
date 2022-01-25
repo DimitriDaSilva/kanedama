@@ -1,5 +1,4 @@
 import { useTheme } from 'styled-components';
-import defaultTheme from 'styles/theme';
 import Card from '../atoms/Card';
 import CardItem from '../atoms/CardItem';
 import Typography from '../atoms/Typography';
@@ -17,7 +16,7 @@ const AccountCard = ({
 }: AccountCardProps) => {
   const { colors } = useTheme();
   return (
-    <Card>
+    <Card data-cy="account-card">
       <CardItem>
         <Typography color={colors.accent} fontWeight="bold">
           Account Number:

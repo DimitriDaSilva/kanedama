@@ -1,13 +1,16 @@
 import Grid from '@/components/atoms/Grid';
 import AccountCard from '@/components/molecules/AccountCard';
-import { useAccountProfile } from 'models/hooks/useAccountProfile';
+import { ErrorView } from '@/components/molecules/ErrorView';
+import { useAccountProfile } from 'models/hooks/useAccounts';
 import { ContentContainer } from './layouts';
 import { Skeleton } from './layouts';
 
 const AccountProfile = () => {
-  const { data: accounts, isLoading } = useAccountProfile();
+  const { data: accounts, isLoading, isError } = useAccountProfile();
 
   if (isLoading) return <Skeleton />;
+
+  if (isError) return <ErrorView data-cy="error-view-accounts" />;
 
   return (
     <ContentContainer>

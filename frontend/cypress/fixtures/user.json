@@ -1,0 +1,10 @@
+{
+  "results": [
+    {
+      "name": { "first": "John", "last": "Doe" },
+      "picture": {
+        "medium": "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+      }
+    }
+  ]
+}

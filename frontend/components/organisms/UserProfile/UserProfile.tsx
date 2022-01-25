@@ -1,10 +1,15 @@
 import Avatar from 'components/atoms/Avatar';
 import Typography from 'components/atoms/Typography';
 import { Container, NameContainer, Skeleton } from './layouts';
-import { useUserProfile } from 'models/hooks/useUserProfile';
+import { useUserProfile } from 'models/hooks/useUser';
+import { ErrorView } from '@/components/molecules/ErrorView';
 
 const UserProfile = () => {
-  const { data: user, isLoading } = useUserProfile({
+  const {
+    data: user,
+    isLoading,
+    isError,
+  } = useUserProfile({
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
     refreshWhenOffline: false,
@@ -14,16 +19,20 @@ const UserProfile = () => {
 
   if (isLoading) return <Skeleton />;
 
+  if (isError) return <ErrorView data-cy="error-view-user" />;
+
   const { firstname, lastname, photoURL } = user;
 
   return (
     <Container>
-      <Avatar src={photoURL} />
+      <Avatar src={photoURL} alt="avatar" data-cy="avatar" />
       <NameContainer>
-        <Typography fontSize="2rem" uppercase>
+        <Typography fontSize="2rem" uppercase data-cy="firstname">
           {firstname}
         </Typography>
-        <Typography fontSize="2rem">{lastname}</Typography>
+        <Typography fontSize="2rem" data-cy="lastname">
+          {lastname}
+        </Typography>
       </NameContainer>
     </Container>
   );

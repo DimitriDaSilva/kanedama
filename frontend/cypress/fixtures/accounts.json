@@ -1,0 +1,5 @@
+[
+  { "current": 0, "currency": "EUR", "account_number": 0 },
+  { "current": 10, "currency": "EUR", "account_number": 1 },
+  { "current": 100, "currency": "EUR", "account_number": 2 }
+]

@@ -1,10 +1,9 @@
 import { Account } from 'models/Account';
 import { createAccount } from 'models/transformers/createAccount';
 import { createQuery } from 'utils/createQuery';
-
-const url = 'https://kata.getmansa.com/accounts';
+import url from 'constants/urls';
 
 export const useAccountProfile = createQuery<Account[]>({
-  url,
+  url: url.ACCOUNTS,
   transformer: (accounts) => accounts.map(createAccount),
 });
