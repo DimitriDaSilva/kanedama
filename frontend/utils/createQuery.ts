@@ -13,6 +13,7 @@ export interface QueryFactoryResult<T> {
   data: T;
 }
 
+// overengineering cool hook factory
 export const createQuery =
   <T>({ url, transformer }: QueryFactoryOptions<T>) =>
   (options?: SWROptions): QueryFactoryResult<T> => {

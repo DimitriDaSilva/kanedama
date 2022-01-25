@@ -1,11 +1,11 @@
 import { ErrorView } from '@/components/molecules/ErrorView';
 import Typography from 'components/atoms/Typography';
-import { useCompagnyProfile } from 'models/hooks/useCompany';
+import { useCompagny } from 'models/hooks/useCompany';
 import { ContentContainer } from './layouts';
 import { Skeleton } from './layouts';
 
 const CompagnyProfile = () => {
-  const { data: company, isLoading, isError } = useCompagnyProfile();
+  const { data: company, isLoading, isError } = useCompagny();
 
   if (isLoading) return <Skeleton />;
 

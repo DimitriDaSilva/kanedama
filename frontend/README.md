@@ -1,90 +1,82 @@
-## The Mission
+# Guilhem's entry test
 
-Your mission, should you accept it, is to create a dashboard-like UI, where we can find:
+Hello reviewer, i hope you're well, it took me something like a big day
 
-- User's personal information
-  - First & Last name
-- User's business information
-  - SIRET number
-  - Creation date
-  - Address (example: 10 Rue Gabriel Peri 92120, Montrouge)
-- User's financial information
-  - Accounts (TRANSACTION / SAVINGS)
-  - Current balance
+### top-level layout directory layout
 
-### Design
+    .
+    ├── components              # here we put every react components apart pages
+    ├── constants               # things ... that are constants
+    ├── models                  # Data models, transformers and linked hooks
+    └── utils                   # logic that don't goes in models
 
-Global design to follow can be found below (feel free to improve and/or add your personnal touch)
+we can break down components in atomics components
 
-|                        User page                        |
-| :-----------------------------------------------------: |
-| ![Design wireframe](../.github/assets/frontend/frontend-wireframe.png) |
+    .
+    ├── ...
+    ├── components
+    │   ├── atoms               # only styled.x stuffs, very small blocks
+    │   ├── molecule            # complexe blocks created from groups of atoms, but still pure
+    │   ├── organims            # complexe blocks hydrated with data
+    │   └── templates           # utils components, layout and stuffs
+    └── ...
 
-### Scope
+### Automated tests
 
-The view should only be for **one** single user.
+We have some unit tests under test folder, it will mainly test the logic from utils, and we have some cypress integrations tests under the cypress folder, that should check if app give us entities with working fixtures, and should check if the app show ErrorView with broken fixtures. note that i kinda discover cypress, but i will just spam every new code i'll do with that, started with my side project
 
-You will need to leverage an open API for business data to fill in the details and functionality as described below.
+### Models
 
-## Delivery
+Here we have data models
 
-A clone or fork of this repositery containing:
+```typescript
+export interface User {
+  firstname: string;
+  lastname: string;
+  photoURL: string;
+}
+```
 
-- An integration of the wireframe above, with the data flow described in this brief
-- A README file at the root of your repo explaining your approach, design choices, improvements and next steps
+with associated transformers, to extract data from request
 
-Bonus:
+```typescript
+export const createUser: Transformer<User> = (user) => {
+  const { name, picture } = user.results[0];
+  return {
+    firstname: name.first,
+    lastname: name.last,
+    photoURL: picture.medium,
+  };
+};
+```
 
-- Tests
-- Deployed app
-- Atomic, reusable and stateless base components
-- Components positionned by the container (parent)
+and the hook that provide the model to UI
 
-Our stack consists of TypeScript, React, [Next.js](https://nextjs.org/), CSS-in-JS with [styled-component](https://styled-components.com/), and we test with Jest and Cypress.
+```typescript
+export const useUser = createQuery<User>({
+  url: url.USER,
+  transformer: createUser,
+});
+```
 
-If you're comfortable with it, we encourage you to complete the test in the stack described above. You're also free to use a component library to get you started and any other package that you might think necessary.
+... "but **bro**, thats not a hook",
 
-We expect you to test your code: unit and end-to-end tests are a big plus. From our experience React Testing Library and Cypress work very well for React application testing, but you're free to pick your favourite.
+well, **yes**. but is that overengineering ? **also yes**.
 
-### What We Care About
+I just wanted to show off some cool closure hook's factory 🦾🤖
+you can just do something like that:
 
-We're interested in your method and how you approach the problem just as much as we're interested in the end result.
+```typescript
+export const useUser = (options) =>
+  useQuery<User>(url.USER, createUser, options);
+```
 
-Here's what you should strive for:
+### Cool factory that is not overengineering
 
-- A consistent architecture, focused on the simplicity of the project (**keep it simple!**), pragmatism, no over-engineering
-- Extensible code
-- Clear data flow (with at least one custom hook for data fetching)
-- Fluid layout that would fit on main viewports (from mobile to desktop)
-- Concise and clear commit messages
-- Complete user information (Profil picture, phone number, etc ...) with
-  another API like [randomuser](https://randomuser.me)
+We have a fetcher factory that you can use this way
 
-## The APIs
+```typescript
+const { data, error } = useSWR(url, createFetcher<T>(transformer), options);
+```
 
-### French government API
-
-For business information, you'll have to use the French SIRENE public API,
-you can find the documentation about it [here](https://entreprise.data.gouv.fr/api_doc/sirene).
-
-You can retrieve the information about a business by using the following URL:
-`https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/:siren`
-
-> The `unites_legales` object contains all the necessary information.
-
-For example, [here is the API link](https://entreprise.data.gouv.fr/api/sirene/v3/unites_legales/852379890)
-that gives you the SIRENE profile of MansaGroup:
-
-You can choose any SIREN (legal id) you want for your test.
-
-### Kanedama API
-
-For financial information, you'll use a custom API:
-
-| Method  | Endpoint  | Description                                |
-| ------- | --------- | ------------------------------------------ |
-| **GET** | /accounts | Fetch all bank accounts from a _test user_ |
-
-**Root endpoint is: https://kata.getmansa.com/**
-
-You can see our [Backend test README](../backend/README.md) if you want more information about this endpoint.
+that will create a fetcher with a transformer with a generic type

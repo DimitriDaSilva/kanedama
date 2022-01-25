@@ -1,7 +1,7 @@
 import Avatar from 'components/atoms/Avatar';
 import Typography from 'components/atoms/Typography';
 import { Container, NameContainer, Skeleton } from './layouts';
-import { useUserProfile } from 'models/hooks/useUser';
+import { useUser } from 'models/hooks/useUser';
 import { ErrorView } from '@/components/molecules/ErrorView';
 
 const UserProfile = () => {
@@ -9,7 +9,7 @@ const UserProfile = () => {
     data: user,
     isLoading,
     isError,
-  } = useUserProfile({
+  } = useUser({
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
     refreshWhenOffline: false,
