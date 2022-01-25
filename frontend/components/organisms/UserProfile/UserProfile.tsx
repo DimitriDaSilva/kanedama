@@ -7,6 +7,7 @@ const UserProfile = () => {
   const { data: user, isLoading } = useUserProfile({
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
+    refreshWhenOffline: false,
     refreshWhenHidden: false,
     refreshInterval: 0,
   });

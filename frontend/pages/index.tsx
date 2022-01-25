@@ -34,7 +34,6 @@ const Home: NextPage = () => (
         <Typography fontSize="1.5rem" fontWeight="bold">
           Compagny
         </Typography>
-
         <CompagnyProfile />
       </SectionContainer>
       <SectionContainer>

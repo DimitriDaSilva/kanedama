@@ -1,14 +1,13 @@
 import styled, { CSSProperties } from 'styled-components';
-import colors from 'styles/colors';
 
-const TypographySkeleton = styled.div<{
+const RectangleSkeleton = styled.div<{
   height?: CSSProperties['height'];
   width?: CSSProperties['width'];
 }>`
   height: ${({ height }) => height || '3rem'};
-  background-color: ${colors.SKELETON};
+  background-color: ${({ theme }) => theme.colors.skeleton};
   width: ${({ width }) => width || '100%'};
-  border-radius: 0.5rem;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
 `;
 
-export default TypographySkeleton;
+export default RectangleSkeleton;

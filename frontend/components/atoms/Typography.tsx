@@ -1,5 +1,4 @@
 import styled, { CSSProperties } from 'styled-components';
-import colors from 'styles/colors';
 
 const Typography = styled.div<{
   fontSize?: CSSProperties['fontSize'];
@@ -9,7 +8,7 @@ const Typography = styled.div<{
 }>`
   display: flex;
   font-size: ${({ fontSize }) => fontSize || '1rem'};
-  color: ${({ color }) => color || colors.TEXT};
+  color: ${({ color, theme }) => color || theme.colors.text};
   text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : 'none')};
   font-weight: ${({ fontWeight }) => fontWeight || 'normal'};
 `;

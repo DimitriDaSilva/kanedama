@@ -1,5 +1,5 @@
-import CardSkeleton from '@/components/atoms/CardSkeleton';
 import Grid from '@/components/atoms/Grid';
+import RectangleSkeleton from '@/components/atoms/RectangleSkeleton';
 import styled from 'styled-components';
 
 export const ContentContainer = styled.div`
@@ -11,7 +11,7 @@ export const Skeleton = () => (
   <ContentContainer>
     <Grid>
       {[1, 2, 3, 4].map((key) => (
-        <CardSkeleton key={key} />
+        <RectangleSkeleton key={key} width="22rem" height="6.5rem" />
       ))}
     </Grid>
   </ContentContainer>
