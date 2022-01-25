@@ -2,7 +2,7 @@
 
 Hello reviewer, i hope you're well, it took me something like a big day
 
-DEMO: https://kanedama-frontend.vercel.app/
+DEMO: https://kanedama-frontend-eastmeridian.vercel.app/
 
 ### top-level layout directory layout
 
